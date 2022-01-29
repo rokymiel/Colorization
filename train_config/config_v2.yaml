@@ -1,0 +1,21 @@
+
+#hydra:
+#  run:
+#    dir: outputs/${name}
+
+project_name: Colorization
+run_name: End
+
+lr_G: 2e-4
+lr_D: 2e-4
+beta1: 0.5
+beta2: 0.999
+lambda_L1: 100.
+gan_mode: vanilla
+init: norm
+epochs: 20
+batch_size: 8
+seed: 42
+
+execute_pretrain_generator_only: True
+

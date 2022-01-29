@@ -1,0 +1,32 @@
+
+all
+
+project_name
+run_name
+
+lr_G=2e-4,
+lr_D=2e-4,
+beta1=0.5,
+beta2=0.999,
+lambda_L1=100.
+gan_mode='vanilla'
+init='norm'
+epochs
+batch
+
+data_path
+
+
+----
+
+for generator pretrain
+
+lr
+
+
+config
+  run_type (with ???)
+    - train
+      | generator_pretrain: False
+      | generator_type: v1 / v2
+    - val (with paths to weighs)
