@@ -1,0 +1,13 @@
+project_name: Colorization
+run_name: End_v2
+lr_G: 0.0002
+lr_D: 0.0002
+beta1: 0.5
+beta2: 0.999
+lambda_L1: 100.0
+gan_mode: vanilla
+epochs: 120
+batch_size: 8
+seed: 42
+batch_num_to_val: 2
+execute_pretrain_generator_only: false
