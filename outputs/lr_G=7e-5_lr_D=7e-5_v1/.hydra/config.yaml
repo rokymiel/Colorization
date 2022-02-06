@@ -1,0 +1,12 @@
+project_name: Colorization
+run_name: lr_G=7e-5_lr_D=7e-5_v1
+lr_G: 7.0e-05
+lr_D: 7.0e-05
+beta1: 0.5
+beta2: 0.999
+lambda_L1: 100.0
+gan_mode: vanilla
+epochs: 20
+batch_size: 16
+seed: 123
+batch_num_to_val: 1
