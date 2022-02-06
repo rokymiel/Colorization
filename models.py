@@ -1,6 +1,8 @@
 import torch
 from torch import nn, optim
 from loss import GANLoss
+from utils import init_model
+
 
 class UnetBlock(nn.Module):
 
@@ -113,7 +115,7 @@ class PatchDiscriminator(nn.Module):
 
 class MainModel(nn.Module):
     def __init__(self, net_G=None, lr_G=2e-4, lr_D=2e-4,
-                 beta1=0.5, beta2=0.999, lambda_L1=100.):
+                 beta1=0.5, beta2=0.999, lambda_L1=100., gan_mode='vanilla'):
         super().__init__()
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -124,7 +126,7 @@ class MainModel(nn.Module):
         else:
             self.net_G = net_G.to(self.device)
         self.net_D = init_model(PatchDiscriminator(input_c=3, n_down=3, num_filters=64), self.device)
-        self.GANcriterion = GANLoss(gan_mode='vanilla').to(self.device)
+        self.GANcriterion = GANLoss(gan_mode=gan_mode).to(self.device)
         self.L1criterion = nn.L1Loss()
         self.opt_G = optim.Adam(self.net_G.parameters(), lr=lr_G, betas=(beta1, beta2))
         self.opt_D = optim.Adam(self.net_D.parameters(), lr=lr_D, betas=(beta1, beta2))

@@ -4,6 +4,7 @@ from skimage.color import rgb2lab, lab2rgb
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def lab_to_rgb(L, ab):
     L = (L + 1.) * 50.
     ab = ab * 110.
@@ -14,7 +15,8 @@ def lab_to_rgb(L, ab):
         rgb_imgs.append(img_rgb)
     return np.stack(rgb_imgs, axis=0)
 
-def get_imgs_fig(lab, fake, real):
+
+def get_imgs_fig(lab, fake, real, epoch):
     """
     Метод для создания фигуры с изображениями эксперимента
     :param lab: изображение LAB
@@ -24,25 +26,26 @@ def get_imgs_fig(lab, fake, real):
     """
     fig, axes = plt.subplots(3, 1)
 
-    axes[0].imshow(lab)
+    axes[0].imshow(lab, cmap='gray')
     axes[0].axis("off")
-    axes[0].set_title('LAB изображение', fontsize = 20)
+    axes[0].set_title('LAB изображение', fontsize=20)
 
     axes[1].imshow(fake)
     axes[1].axis("off")
-    axes[1].set_title('Раскрашенное', fontsize = 20)
+    axes[1].set_title('Раскрашенное', fontsize=20)
 
     axes[2].imshow(real)
     axes[2].axis("off")
-    axes[2].set_title('Оригинал', fontsize = 20)
+    axes[2].set_title('Оригинал', fontsize=20)
 
+    fig.suptitle(f'Эпоха {epoch}', fontsize=25)
     fig.set_size_inches(5, 15)
     plt.close()
 
     return fig
 
-class Logger:
 
+class Logger:
     project = None
 
     @staticmethod
@@ -54,7 +57,7 @@ class Logger:
         wandb.login()
         Logger.project = project_name
 
-    def __init__(self, name, model = None):
+    def __init__(self, name, model=None):
         """
         :param name: название текущего эксперимента
         """
@@ -64,16 +67,17 @@ class Logger:
     def __enter__(self):
         wandb.init(project=self.project, name=self.name)
         if not self.model is None: wandb.watch(self.model)
-        return  self
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         wandb.finish()
 
-    def log_dict(self, dict):
+    def log_dict(self, dict, epoch):
         """
         Логирует словарь
         """
-        wandb.log(dict)
+        wandb.log(dict, step=epoch)
+
     def log_images(self, figs, epoch):
         """
         Логирует массив фигур как изображения
@@ -81,4 +85,5 @@ class Logger:
         :param epoch: номер эпохи
         """
         images = list(map(lambda x: wandb.Image(x), figs))
-        wandb.log({"Изображения": images}, step = epoch)
+
+        wandb.log({"Изображения": images}, step=epoch)

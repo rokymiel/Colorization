@@ -3,6 +3,28 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/beta1=0.9_v1/wandb/run-20220202_131103-2mveab0x/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/End/wandb/run-20220129_235104-3r1n0dtp/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/End_v2/wandb/run-20220130_163054-qj6xquuf/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lambda_L1=50_v1/wandb/run-20220202_215719-3b1ht7rx/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lambda_L1=300_v1/wandb/run-20220202_203544-1b1hgz20/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=5e-4_lr_D=5e-4_v1/wandb/run-20220202_114034-sch91tzq/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=5e-4_lr_D=9e-5_v1/wandb/run-20220202_144402-1868787x/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=7e-5_lr_D=7e-5_v1/wandb/run-20220202_101516-23aykhv5/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=9e-5_lr_D=5e-4_v1/wandb/run-20220202_161851-1wh8y2ap/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/seed=123_v1/wandb/run-20220201_172309-1xv9xf7i/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/seed=123_v2/wandb/run-20220202_235349-mq4oysne/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/beta1=0.9_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/End/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/End_v2/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lambda_L1=50_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lambda_L1=300_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=5e-4_lr_D=5e-4_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=5e-4_lr_D=9e-5_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=7e-5_lr_D=7e-5_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/lr_G=9e-5_lr_D=5e-4_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/seed=123_v1/wandb" />
+      <excludeFolder url="file://$MODULE_DIR$/outputs/seed=123_v2/wandb" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

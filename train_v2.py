@@ -13,9 +13,7 @@ from fastai.data.external import untar_data, URLs
 import torch
 
 
-
 def train_generator(cfg: DictConfig, path):
-
     seed_everything(cfg.seed)
 
     train_paths, val_paths = get_paths(path)
@@ -27,18 +25,19 @@ def train_generator(cfg: DictConfig, path):
     criterion = nn.L1Loss()
     pretrain_generator(net_G, train_dl, opt, criterion, 20)
 
-    torch.save(net_G.state_dict(), "generator.pt")
+    torch.save(net_G.state_dict(), "outputs/End_v2/generator.pt")
 
 
 @hydra.main(config_path="train_config", config_name="config_v2")
 def train(cfg: DictConfig):
-
-    path = untar_data(URLs.COCO_SAMPLE)
-    path = str(path) + "/train_sample"
+    path = cfg.get('data_path')
+    if path is None:
+        path = untar_data(URLs.COCO_SAMPLE)
+        path = str(path) + "/train_sample"
 
     if cfg.execute_pretrain_generator_only:
         train_generator(cfg, path)
-        return 
+        return
 
     Logger.prepare(cfg.project_name)
 
@@ -50,16 +49,17 @@ def train(cfg: DictConfig):
     val_dl = make_dataloaders(paths=val_paths, split='val', batch_size=cfg.batch_size)
 
     net_G = build_res_unet(n_input=1, n_output=2, size=256)
-    net_G.load_state_dict(torch.load("generator.pt", map_location=device))
+    net_G.load_state_dict(torch.load(f"{hydra.utils.get_original_cwd()}/generator.pt", map_location=device))
 
     model = MainModel(net_G=net_G,
                       lr_G=cfg.lr_G,
                       lr_D=cfg.lr_D,
                       beta1=cfg.beta1,
                       beta2=cfg.beta2,
-                      lambda_L1=cfg.lambda_L1)
+                      lambda_L1=cfg.lambda_L1,
+                      gan_mode=cfg.gan_mode)
     with Logger(model=model, name=cfg.run_name) as logger:
-        train_model(model, train_dl, val_dl, cfg.epochs, logger)
+        train_model(model, train_dl, val_dl, cfg.epochs, logger, cfg.batch_num_to_val)
     torch.save(model.state_dict(), "main_model.pt")
 
 

@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 
+
 class GANLoss(nn.Module):
     def __init__(self, gan_mode='vanilla', real_label=1.0, fake_label=0.0):
         super().__init__()

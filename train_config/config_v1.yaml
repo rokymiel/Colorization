@@ -1,7 +1,7 @@
 
-#hydra:
-#  run:
-#    dir: outputs/${name}
+hydra:
+  run:
+    dir: outputs/${run_name}
 
 project_name: Colorization
 run_name: End
@@ -12,7 +12,9 @@ beta1: 0.5
 beta2: 0.999
 lambda_L1: 100.
 gan_mode: vanilla
-init: norm
 epochs: 20
-batch_size: 8
-seed: 42
+batch_size: 16
+seed: 123
+batch_num_to_val: 1
+
+#data_path: ... # Опционально

@@ -1,4 +1,3 @@
-
 import hydra
 from omegaconf import DictConfig
 
@@ -15,8 +14,10 @@ import torch
 def train(cfg: DictConfig):
     Logger.prepare(cfg.project_name)
 
-    path = untar_data(URLs.COCO_SAMPLE)
-    path = str(path) + "/train_sample"
+    path = cfg.get('data_path')
+    if path is None:
+        path = untar_data(URLs.COCO_SAMPLE)
+        path = str(path) + "/train_sample"
 
     seed_everything(cfg.seed)
 
@@ -29,10 +30,12 @@ def train(cfg: DictConfig):
                       lr_D=cfg.lr_D,
                       beta1=cfg.beta1,
                       beta2=cfg.beta2,
-                      lambda_L1=cfg.lambda_L1)
+                      lambda_L1=cfg.lambda_L1,
+                      gan_mode=cfg.gan_mode)
     with Logger(model=model, name=cfg.run_name) as logger:
-        train_model(model, train_dl, val_dl, cfg.epochs, logger)
+        train_model(model, train_dl, val_dl, cfg.epochs, logger, cfg.batch_num_to_val)
     torch.save(model.state_dict(), "main_model.pt")
+
 
 if __name__ == "__main__":
     train()

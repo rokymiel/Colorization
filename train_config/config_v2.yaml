@@ -1,10 +1,10 @@
 
-#hydra:
-#  run:
-#    dir: outputs/${name}
+hydra:
+  run:
+    dir: outputs/${run_name}
 
 project_name: Colorization
-run_name: End
+run_name: seed=123_v2
 
 lr_G: 2e-4
 lr_D: 2e-4
@@ -12,10 +12,11 @@ beta1: 0.5
 beta2: 0.999
 lambda_L1: 100.
 gan_mode: vanilla
-init: norm
-epochs: 20
+epochs: 120
 batch_size: 8
-seed: 42
+seed: 123
+batch_num_to_val: 2
 
-execute_pretrain_generator_only: True
+execute_pretrain_generator_only: False
 
+#data_path: ... # Опционально
