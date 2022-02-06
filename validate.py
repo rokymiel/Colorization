@@ -28,7 +28,6 @@ def validate(cfg: DictConfig):
 
     elif cfg.type == 'v2':
         net_G = build_res_unet(n_input=1, n_output=2, size=256)
-        net_G.load_state_dict(torch.load(cfg.generator_weights_path, map_location=device))
         model = MainModel(net_G=net_G)
         model.load_state_dict(torch.load(cfg.model_weights_path, map_location=device))
     else:
